@@ -397,10 +397,6 @@
             $('#assistant-tooltips').append('主标题包含禁发小组，请检查<br/>');
             error = true;
         }
-        if (/-(HDH|HDS|HDHome|HDSky|Dream)/i.test(title_lowercase)) {
-            $('#assistant-tooltips').append('主标题包含不受信小组，请检查<br/>');
-            error = true;
-        }
         if (!subtitle) {
             $('#assistant-tooltips').append('副标题为空<br/>');
             error = true;
@@ -498,7 +494,7 @@
             error = true;
         }
         if ((/<img\s+[^>]*>|◎/i.test(torrent_extra)) && !$('span[title="制作组"]').length > 0) {
-            $('#assistant-tooltips').append('请移除附加信息中除致谢、制作信息以外的内容。<br/>');
+            $('#assistant-tooltips').append('请移除其它信息中除致谢、制作信息以外的内容。<br/>');
             error = true;
         }
         if (mediainfo_s.length < 30) {
@@ -617,22 +613,6 @@
             }
             if ((/x264/i.test(title_lowercase) && /10bit/i.test(title_lowercase)) || (/Bit\s+depth\s*:\s*10\s+bits/i.test(mediainfo_title) && /Writing\s+library\s*:\s*x264/i.test(mediainfo_title))) {
                 $('#editor-tooltips').append('可替代：x264 10bit 硬件兼容性较差<br/>');
-            }
-            //压制
-            if (/(hds|hdh|Dream)$/i.test(title_lowercase) && [6, 8, 9, 10].includes(type)) {
-                $('#editor-tooltips').append('可替代：不受信小组<br/>');
-            }
-            //DIY
-            if (/(hdhome)$/i.test(title_lowercase) && [1].includes(type)) {
-                $('#editor-tooltips').append('可替代：不受信小组<br/>');
-            }
-            //REMUX
-            if (/(HDH|Dream)$/i.test(title_lowercase) && [4].includes(type)) {
-                $('#editor-tooltips').append('可替代：不受信小组<br/>');
-            }
-            //WEB
-            if (/(HDHWEB)$/i.test(title_lowercase) && [1].includes(type)) {
-                $('#editor-tooltips').append('可替代：不受信小组<br/>');
             }
         }
 
