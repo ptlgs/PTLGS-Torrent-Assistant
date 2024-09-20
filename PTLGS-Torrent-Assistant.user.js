@@ -253,45 +253,47 @@
                 console.log(catText + typeText + encodeText + audioText + resolutionText + areaText + authorText)
 
 
-                // 类型
-                Object.entries(cat_constant).forEach(([key, value]) => {
+                for (const [key, value] of Object.entries(cat_constant).sort((a, b) => b[1].length - a[1].length)) {
                     if (catText.indexOf(value) >= 0) {
                         cat = key;
+                        break;
                     }
-                });
+                }
 
-
-                Object.entries(type_constant).forEach(([key, value]) => {
+                for (const [key, value] of Object.entries(type_constant).sort((a, b) => b[1].length - a[1].length)) {
                     if (typeText.indexOf(value) >= 0) {
                         type = key;
+                        break;
                     }
-                });
+                }
 
-
-                Object.entries(encode_constant).forEach(([key, value]) => {
+                for (const [key, value] of Object.entries(encode_constant).sort((a, b) => b[1].length - a[1].length)) {
                     if (encodeText.indexOf(value) >= 0) {
                         encode = key;
+                        break;
                     }
-                });
+                }
 
-                Object.entries(audio_constant).forEach(([key, value]) => {
+                for (const [key, value] of Object.entries(audio_constant).sort((a, b) => b[1].length - a[1].length)) {
                     if (audioText.indexOf(value) >= 0) {
                         audio = key;
+                        break;
                     }
-                });
+                }
 
-                Object.entries(resolution_constant).forEach(([key, value]) => {
+                for (const [key, value] of Object.entries(resolution_constant).sort((a, b) => b[1].length - a[1].length)) {
                     if (resolutionText.indexOf(value) >= 0) {
                         resolution = key;
+                        break;
                     }
-                });
+                }
 
-                Object.entries(group_constant).forEach(([key, value]) => {
+                for (const [key, value] of Object.entries(group_constant).sort((a, b) => b[1].length - a[1].length)) {
                     if (authorText.indexOf(value) >= 0) {
                         group = key;
+                        break;
                     }
-                });
-
+                }
                 console.log('cat:', cat, 'type:', type, 'encode:', encode, 'audio:', audio, 'resolution:', resolution, 'group:', group);
 
             }
