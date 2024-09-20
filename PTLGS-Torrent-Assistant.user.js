@@ -237,7 +237,7 @@
         var subtitle, cat, type, encode, audio, resolution, group, anonymous;
         var poster;
         var fixtd, douban, imdb, mediainfo_title, mediainfo_s, torrent_extra, douban_raw;
-        var sub_chinese, audio_chinese, is_complete, is_chinese, is_dovi, is_hdr10, is_hdr10p, is_hlg, is_hdr_vivid,
+        var sub_chinese, audio_chinese, is_complete, is_chinese, is_dovi, is_hdr, is_hlg,
             is_c_dub, is_bd, is_cc, is_anime;
         var tdlist = $('#top').next('table').find('td');
 
@@ -332,20 +332,14 @@
                 if (/中字/.test(text)) {
                     is_chinese = true;
                 }
-                if (/HDR10\+/.test(text)) {
-                    is_hdr10p = true;
-                }
-                if (/HDR10(?!\+)/.test(text)) {
-                    is_hdr10 = true;
+                if (/HDR/.test(text)) {
+                    is_hdr = true;
                 }
                 if (/DoVi/.test(text)) {
                     is_dovi = true;
                 }
                 if (/HLG/.test(text)) {
                     is_hlg = true;
-                }
-                if (/菁彩HDR/.test(text)) {
-                    is_hdr_vivid = true;
                 }
                 if (/国配/.test(text)) {
                     is_c_dub = true;
@@ -513,24 +507,12 @@
             $('#assistant-tooltips').append('选择「DoVi」标签，未识别到「DoVi」<br/>');
             error = true;
         }
-        if (/^(?!Encoding).*HDR10\+/im.test(mediainfo_title) && !is_hdr10p) {
-            $('#assistant-tooltips').append('未选择「HDR10+」标签<br/>');
+        if (/^(?!Encoding).*HDR10/im.test(mediainfo_title) && !/^(?!Encode).*HDR10\+/im.test(mediainfo_title) && !is_hdr) {
+            $('#assistant-tooltips').append('未选择「HDR」标签<br/>');
             error = true;
         }
-        if (!/^(?!Encoding).*HDR10\+/im.test(mediainfo_title) && is_hdr10p) {
-            $('#assistant-tooltips').append('选择「HDR10+」标签，未识别到「HDR10+」<br/>');
-            error = true;
-        }
-        if (/^(?!Encoding).*HDR10/im.test(mediainfo_title) && !/^(?!Encode).*HDR10\+/im.test(mediainfo_title) && !is_hdr10) {
-            $('#assistant-tooltips').append('未选择「HDR10」标签<br/>');
-            error = true;
-        }
-        if (!/^(?!Encoding).*HDR10/im.test(mediainfo_title) && is_hdr10) {
-            $('#assistant-tooltips').append('选择「HDR10」标签，未识别到「HDR10」<br/>');
-            error = true;
-        }
-        if (is_hdr10 && is_hdr10p) {
-            $('#assistant-tooltips').append('请勿同时选择「HDR10」与「HDR10+」标签<br/>');
+        if (!/^(?!Encoding).*HDR10/im.test(mediainfo_title) && is_hdr) {
+            $('#assistant-tooltips').append('选择「HDR」标签，未识别到「HDR」<br/>');
             error = true;
         }
         if (/^(?!Encoding).*HLG/im.test(mediainfo_title) && !is_hlg) {
@@ -539,14 +521,6 @@
         }
         if (!/^(?!Encoding).*HLG/im.test(mediainfo_title) && is_hlg) {
             $('#assistant-tooltips').append('选择「HLG」标签，未识别到「HLG」<br/>');
-            error = true;
-        }
-        if (/^(?!Encoding).*HDR Vivid/im.test(mediainfo_title) && !is_hdr_vivid) {
-            $('#assistant-tooltips').append('未选择「菁彩 HDR」标签<br/>');
-            error = true;
-        }
-        if (!/^(?!Encoding).*HDR Vivid/im.test(mediainfo_title) && is_hdr_vivid) {
-            $('#assistant-tooltips').append('选择「菁彩 HDR」标签，未识别到「菁彩 HDR」<br/>');
             error = true;
         }
         if ((/<img\s+[^>]*>|◎/i.test(torrent_extra)) && !$('span[title="制作组"]').length > 0) {
@@ -567,8 +541,8 @@
             error = true;
         }
 
-        if (imageCount < 3) {
-            $('#assistant-tooltips').append('截图未满 3 张<br/>');
+        if (imageCount < 1) {
+            $('#assistant-tooltips').append('截图未满 1 张<br/>');
             error = true;
         }
 
