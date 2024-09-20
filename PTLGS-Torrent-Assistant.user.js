@@ -38,37 +38,19 @@
     }
 
     if (window.location.href.includes("/details.php") || window.location.href.includes("/offers.php")) {
-        $('#outer').prepend('<div style="display: inline-block; padding: 10px 30px; color: white; background: red; font-weight: bold;" id="assistant-tooltips"></div>');
+        $('#outer').prepend('<div style="display: inline-block; padding: 10px 30px; color: white; background: red; font-weight: bold;margin-bottom: 10px" id="assistant-tooltips"></div>');
 
         // 查找目标div
         var targetDiv = document.querySelector('#assistant-tooltips');
         if (targetDiv) {
-            // 创建多选框和标签
-            var checkbox = document.createElement('input');
-            checkbox.type = 'checkbox';
-            checkbox.id = 'editorModeCheckbox';
-            checkbox.checked = isEditor;
-
-            var label = document.createElement('label');
-            label.htmlFor = 'editorModeCheckbox';
-            label.textContent = '种审模式';
-
             // 创建包含多选框和标签的新div
             var containerDiv = document.createElement('div');
             containerDiv.style.cssText = 'display: inline-block; margin-left: 20px; vertical-align: top;';
-            containerDiv.appendChild(checkbox);
-            containerDiv.appendChild(label);
 
             // 创建换行元素并插入
             var breakElement = document.createElement('br');
             targetDiv.parentNode.insertBefore(breakElement, targetDiv.nextSibling);
             targetDiv.parentNode.insertBefore(containerDiv, breakElement.nextSibling);
-
-            // 添加事件监听器来更新isEditor变量、存储状态并刷新页面
-            checkbox.addEventListener('change', function () {
-                GM_setValue('isEditor', this.checked);
-                window.location.reload();  // 刷新页面
-            });
         }
         if (isEditor) {
             $('#assistant-tooltips').after('<br/><div style="display: inline-block; padding: 10px 30px; color: white; background: DarkSlateGray; font-weight: bold;" id="editor-tooltips"></div>');
