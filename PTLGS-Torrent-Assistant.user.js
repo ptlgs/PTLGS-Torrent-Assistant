@@ -481,14 +481,6 @@
             $('#assistant-tooltips').append('Blu-ray 媒体信息请使用 BDInfo<br/>');
             error = true;
         }
-        if (!douban && !imdb) {
-            $('#assistant-tooltips').append('未检测到豆瓣或 IMDb 链接<br/>');
-            error = true;
-        }
-        if (!douban && imdb) {
-            $('#assistant-tooltips').append('未优先使用豆瓣链接<br/>');
-            error = true;
-        }
 
         if ((type === 6 || type === 4 || type === 7 || type === 8 || type === 9 || type === 10) && $('.mediainfo-short .codemain').text().replace(/\s+/g, '') === $('.mediainfo-raw .codemain').text().replace(/\s+/g, '')) {
             $('#assistant-tooltips').append('媒体信息未解析<br/>');
@@ -743,13 +735,14 @@
                 $('#assistant-tooltips').append('选择「动画」标签，豆瓣未识别到「动画」类别<br/>');
                 error = true;
             }
-            //显示结果
-            if (error) {
-                $('#assistant-tooltips').css('background', 'red');
-            } else {
-                $('#assistant-tooltips').append('此种子未检测到异常');
-                $('#assistant-tooltips').css('background', 'green');
-            }
+        }
+
+        //显示结果
+        if (error) {
+            $('#assistant-tooltips').css('background', 'red');
+        } else {
+            $('#assistant-tooltips').append('此种子未检测到异常');
+            $('#assistant-tooltips').css('background', 'green');
         }
 
     }
