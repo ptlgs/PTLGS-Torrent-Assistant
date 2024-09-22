@@ -221,8 +221,8 @@
         var fixtd, douban, imdb, mediainfo_title, mediainfo_s, torrent_extra, douban_raw;
         var sub_chinese, audio_chinese, is_complete, is_chinese, is_dovi, is_hdr, is_hlg,
             is_c_dub, is_bd, is_cc, is_anime;
-        var tdlist = $('#top').next('table').find('td');
-
+        //var tdlist = $('#top').next('table').find('td');
+        var tdlist = $('#top').next('table').find('td').length !== 0 ? $('#top').next('table').find('td') : $('#top').next().next('table').find('td')
         // Mediainfo 信息
 
         mediainfo_s = Array.from($('.mediainfo tr')).map(x => $(x).text()).join('\n');
