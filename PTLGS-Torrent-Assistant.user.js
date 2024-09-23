@@ -694,7 +694,7 @@
                 }
             }
 
-            if (cat && douban_cat && douban_cat >= 401 && douban_cat <= 408 && douban_cat !== cat) {
+            if (cat && douban_cat && douban_cat >= 401 && douban_cat <= 408 && douban_cat !== parseInt(cat)) {
                 $('#assistant-tooltips').append("豆瓣检测分类为" + cat_constant[douban_cat] + "，选择分类为" + cat_constant[cat] + '<br/>');
                 error = true;
             }
