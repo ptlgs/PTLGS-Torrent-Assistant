@@ -1,7 +1,11 @@
 // ==UserScript==
 // @name         ptlgs-Torrent-Assistant
+// @namespace    https://userscripts.ptl.gs/PTLGS-Torrent-Assistant.user.js
+// @updateURL    https://userscripts.ptl.gs/PTLGS-Torrent-Assistant.user.js
+// @downloadURL  https://userscripts.ptl.gs/PTLGS-Torrent-Assistant.user.js
+// @homepage     https://ptlgs.org/
 // @namespace    http://tampermonkey.net/
-// @version      1.1.40
+// @version      1.1.43
 // @description  劳改所审种助手
 // @author       LGS
 // @include      http*://ptlgs.org/details.php*
