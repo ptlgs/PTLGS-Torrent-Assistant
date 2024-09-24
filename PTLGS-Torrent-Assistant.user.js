@@ -407,10 +407,10 @@
             $('#assistant-tooltips').append('副标题为空<br/>');
             error = true;
         }
-        if (/[【】]/.test(subtitle)) {
+        /*if (/[【】]/.test(subtitle)) {
             $('#assistant-tooltips').append('副标题包含【】，请修改为 []<br/>');
             error = true;
-        }
+        }*/
         if (!cat) {
             $('#assistant-tooltips').append('未选择分类<br/>');
             error = true;
