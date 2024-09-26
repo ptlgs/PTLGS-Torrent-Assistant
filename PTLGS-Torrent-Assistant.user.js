@@ -259,42 +259,42 @@
 
                 for (const [key, value] of Object.entries(cat_constant).sort((a, b) => b[1].length - a[1].length)) {
                     if (catText.indexOf(value) >= 0) {
-                        cat = key;
+                        cat = parseInt(key);
                         break;
                     }
                 }
 
                 for (const [key, value] of Object.entries(type_constant).sort((a, b) => b[1].length - a[1].length)) {
                     if (typeText.indexOf(value) >= 0) {
-                        type = key;
+                        type = parseInt(key);
                         break;
                     }
                 }
 
                 for (const [key, value] of Object.entries(encode_constant).sort((a, b) => b[1].length - a[1].length)) {
                     if (encodeText.indexOf(value) >= 0) {
-                        encode = key;
+                        encode = parseInt(key);
                         break;
                     }
                 }
 
                 for (const [key, value] of Object.entries(audio_constant).sort((a, b) => b[1].length - a[1].length)) {
                     if (audioText.indexOf(value) >= 0) {
-                        audio = key;
+                        audio = parseInt(key);
                         break;
                     }
                 }
 
                 for (const [key, value] of Object.entries(resolution_constant).sort((a, b) => b[1].length - a[1].length)) {
                     if (resolutionText.indexOf(value) >= 0) {
-                        resolution = key;
+                        resolution = parseInt(key);
                         break;
                     }
                 }
 
                 for (const [key, value] of Object.entries(group_constant).sort((a, b) => b[1].length - a[1].length)) {
                     if (authorText.indexOf(value) >= 0) {
-                        group = key;
+                        group = parseInt(key);
                         break;
                     }
                 }
@@ -343,7 +343,8 @@
                 }
             }
             if (td.text().trim() === '其它信息') {
-                torrent_extra = $('#kdescr').html();
+                if ($('#kother').length) torrent_extra = $('#kother').html();
+                else torrent_extra = $('#kdescr').html();
             }
             if (td.text() === '字幕') {
                 var lastChild = td.parent().children().last();
@@ -466,7 +467,7 @@
             error = true;
         }
 
-        if ((type === 6 || type === 4 || type === 7 || type === 8 || type === 9 || type === 10) && $('.mediainfo-short .codemain').text().replace(/\s+/g, '') === $('.mediainfo-raw .codemain').text().replace(/\s+/g, '')) {
+        if (([1, 2, 3, 4, 5, 7, 8, 11, 12, 14, 15].indexOf(type) === -1) && $('.mediainfo-short .codemain').text().replace(/\s+/g, '') === $('.mediainfo-raw .codemain').text().replace(/\s+/g, '')) {
             $('#assistant-tooltips').append('媒体信息未解析<br/>');
             error = true;
         }
@@ -525,7 +526,7 @@
         const pichost_list = [
             'files.ptlgs.org',
             'cmct.xyz',
-            "static.ssdforum.org",
+            'static.ssdforum.org',
             'static.hdcmct.org',
             'gifyu.com',
             'imgbox.com',
@@ -694,7 +695,7 @@
                 }
             }
 
-            if (cat && douban_cat && douban_cat >= 401 && douban_cat <= 408 && douban_cat !== parseInt(cat)) {
+            if (cat && douban_cat && douban_cat >= 401 && douban_cat <= 408 && douban_cat !== cat) {
                 $('#assistant-tooltips').append("豆瓣检测分类为" + cat_constant[douban_cat] + "，选择分类为" + cat_constant[cat] + '<br/>');
                 error = true;
             }
