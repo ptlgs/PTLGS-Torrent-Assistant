@@ -342,9 +342,18 @@
                     is_anime = true;
                 }
             }
-            if (td.text().trim() === '其它信息') {
-                if ($('#kother').length) torrent_extra = $('#kother').html();
-                else torrent_extra = $('#kdescr').html();
+            if ((location.href.includes('edit.php') || location.href.includes('details.php')|| location.href.includes('offers.php')) && $('span[title="制作组"]') && $('span[title="制作组"]').length === 0) {
+                if ($('#kother') && $('#kother').length){
+                    torrent_extra = $('#kother').html();
+            }
+                else if ($('#kdescr') && $('#kdescr').length) {
+                    torrent_extra = $('#kdescr').html();
+                }
+                else {
+                    $('#assistant-tooltips').append('未检测到致谢信息，如为原始发布者可忽略，否则请添加到“其它信息”区域<br/>');
+                    $('#assistant-tooltips').append('致谢信息格式:[quote][b][color=blue]xxx组作品，感谢原制作者发布。[/color][/b][/quote]<br/>');
+                    error = true
+                }
             }
             if (td.text() === '字幕') {
                 var lastChild = td.parent().children().last();
@@ -484,7 +493,7 @@
             $('#assistant-tooltips').append('选择「DoVi」标签，未识别到「DoVi」<br/>');
             error = true;
         }
-        if (/^(?!Encoding).*HDR10/im.test(mediainfo_title) && !/^(?!Encode).*HDR10\+/im.test(mediainfo_title) && !is_hdr) {
+        if (/^(?!Encoding).*HDR format/im.test(mediainfo_title) && !/^(?!Encode).*HDR10\+/im.test(mediainfo_title) && !is_hdr) {
             $('#assistant-tooltips').append('未选择「HDR」标签<br/>');
             error = true;
         }
