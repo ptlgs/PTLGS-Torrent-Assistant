@@ -493,11 +493,11 @@
             $('#assistant-tooltips').append('选择「DoVi」标签，未识别到「DoVi」<br/>');
             error = true;
         }
-        if (/^(?!Encoding).*HDR format/im.test(mediainfo_title) && !/^(?!Encode).*HDR10\+/im.test(mediainfo_title) && !is_hdr) {
+        if (/^(?!Encoding).*HDR format/im.test(mediainfo_title) && !/^(?!Encode).*HDR format\+/im.test(mediainfo_title) && !is_hdr) {
             $('#assistant-tooltips').append('未选择「HDR」标签<br/>');
             error = true;
         }
-        if (!/^(?!Encoding).*HDR10/im.test(mediainfo_title) && is_hdr) {
+        if (!/^(?!Encoding).*HDR format/im.test(mediainfo_title) && is_hdr) {
             $('#assistant-tooltips').append('选择「HDR」标签，未识别到「HDR」<br/>');
             error = true;
         }
