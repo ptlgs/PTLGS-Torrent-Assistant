@@ -133,7 +133,6 @@
         }
 
         title = title.trim();
-        console.log(title);
 
         var title_lowercase = title.toLowerCase();
         var title_type, title_encode, title_audio, title_resolution, title_group, title_is_complete;
@@ -217,9 +216,6 @@
             title_group = 11;
         }
 
-        console.log('title_type:', title_type, 'title_encode:', title_encode, 'title_audio:', title_audio, 'title_resolution:', title_resolution, 'title_group:', title_group, 'title_is_complete:', title_is_complete);
-
-
         var subtitle, cat, type, encode, audio, resolution, group, anonymous;
         var poster;
         var fixtd, douban, imdb, mediainfo_title, mediainfo_s, torrent_extra, douban_raw;
@@ -229,8 +225,14 @@
         var tdlist = $('#top').next('table').find('td').length !== 0 ? $('#top').next('table').find('td') : $('#top').next().next('table').find('td')
         // Mediainfo 信息
 
-        mediainfo_s = Array.from($('.mediainfo tr')).map(x => $(x).text()).join('\n');
-        mediainfo_title = $('.nexus-media-info-raw pre').text();
+        mediainfo_s = '';
+        for (var ls = 0; ls <  document.getElementsByTagName('pre').length; ls ++) {
+            mediainfo_s = document.getElementsByTagName('pre')[ls].textContent.replace(/\s+/g, ' ')
+        };
+        mediainfo_title = '';
+        for (var mt = 0; mt <  document.getElementsByTagName('pre').length; mt ++) {
+            mediainfo_title = document.getElementsByTagName('pre')[mt].textContent.replace(/\s+/g, ' ')
+        };
         for (var i = 0; i < tdlist.length; i++) {
             var td = $(tdlist[i]);
 
@@ -254,7 +256,6 @@
                 var resolutionText = $('b[title="分辨率"]').next('span').text();
                 var areaText = $('b[title="地区"]').next('span').text();
                 var authorText = $('b[title="制作组"]').next('span').text();
-                console.log(catText + typeText + encodeText + audioText + resolutionText + areaText + authorText)
 
 
                 for (const [key, value] of Object.entries(cat_constant).sort((a, b) => b[1].length - a[1].length)) {
@@ -298,8 +299,6 @@
                         break;
                     }
                 }
-                console.log('cat:', cat, 'type:', type, 'encode:', encode, 'audio:', audio, 'resolution:', resolution, 'group:', group);
-
             }
 
             if (td.text() === '行为') {
@@ -501,7 +500,7 @@
             $('#assistant-tooltips').append('未选择「HDR」标签<br/>');
             error = true;
         }
-        if (!/^(?!Encoding).*HDR format/im.test(mediainfo_title) && is_hdr) {
+        if (!/^(?!Encoding).*HDR|hdr10 format/im.test(mediainfo_title) && is_hdr) {
             $('#assistant-tooltips').append('选择「HDR」标签，未识别到「HDR」<br/>');
             error = true;
         }
@@ -593,7 +592,6 @@
             if (/SUBtitleS:/.test(mediainfo_title)) {
                 $('#editor-tooltips').append('识别到「SUBtitleS:」相关字符，请检查BDInfo<br/>');
             }
-            console.log("(mediainfo_title.match(/[^\\S\\r\\n]/g) || []).length" + (mediainfo_title.match(/(?<!\S)[ ]{2,}(?!\S)/g) || []).length)
             if ((mediainfo_title.match(/(?<!\S)[ ]{2,}(?!\S)/g) || []).length < 30 && type != 1) {
                 $('#editor-tooltips').append('识别到「mediainfo」空格字符过少，请检查排版是否正确<br/>');
             }
@@ -675,7 +673,6 @@
             }
             var douban_type = (findDouban('类型') || '').split(" / ")[0];
             var country = (findDouban('产地') || '').split(" / ")[0];
-            console.log('country' + country); // 打印找到的内容或null
 
             // 定义包含所有欧美国家的数组
             const europeanAndAmericanCountries = [
